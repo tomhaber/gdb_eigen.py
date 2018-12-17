@@ -21,7 +21,11 @@ class WriteEigenH5(gdb.Command):
     array = to_numpy(expr)
 
     hf = h5py.File(fname, 'a')
-    hf.create_dataset(name, data=array)
+    if not name in hf:
+        hf.create_dataset(name, data=array)
+    else:
+        data = hf.get(name)
+        data[...] = array
     hf.close()
 
     self.dont_repeat()
