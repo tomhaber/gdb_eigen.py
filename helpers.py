@@ -95,4 +95,5 @@ type_dict = {}
 type_dict[re.compile('^Eigen::Matrix<.*>$')] = lambda val: eigen_matrix_info(val)
 type_dict[re.compile('^Eigen::Array<.*>$')]  = lambda val: eigen_matrix_info(val)
 type_dict[re.compile('^Eigen::Ref<.*>$')]  = lambda val: eigen_ref_info(val)
+type_dict[re.compile('^Eigen::Map<.*>$')]  = lambda val: eigen_ref_info(val)
 type_dict[re.compile('^Eigen::Block<.*>$')]  = lambda val: eigen_block_info(val)

@@ -113,6 +113,7 @@ def build_eigen_dictionary ():
     pretty_printers_dict[re.compile('^Eigen::Matrix<.*>$')] = lambda val: EigenMatrixPrinter("Matrix", eigen_matrix_info(val))
     pretty_printers_dict[re.compile('^Eigen::Array<.*>$')]  = lambda val: EigenMatrixPrinter("Array", eigen_matrix_info(val))
     pretty_printers_dict[re.compile('^Eigen::Ref<.*>$')]  = lambda val: EigenMatrixPrinter("Ref", eigen_ref_info(val))
+    pretty_printers_dict[re.compile('^Eigen::Map<.*>$')]  = lambda val: EigenMatrixPrinter("Map", eigen_ref_info(val))
     pretty_printers_dict[re.compile('^Eigen::Block<.*>$')]  = lambda val: EigenMatrixPrinter("Block", eigen_block_info(val))
 
 def register_eigen_printers(obj):
