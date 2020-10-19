@@ -85,6 +85,16 @@ def eigen_block_info(val):
     data = val['m_data']
     return rows, cols, rowMajor, innerType, data
 
+def std_vector_info(val):
+    type_, tag = value_type(val)
+
+    innerType = type_.template_argument(0)
+    start = val['_M_impl']['_M_start']
+    finish = val['_M_impl']['_M_finish']
+    length = finish - start
+
+    return length, 1, 1, innerType, start
+
 def find_converter(val):
     type_, typename = value_type(val)
     for matcher, converter in type_dict.items():
@@ -97,3 +107,4 @@ type_dict[re.compile('^Eigen::Array<.*>$')]  = lambda val: eigen_matrix_info(val
 type_dict[re.compile('^Eigen::Ref<.*>$')]  = lambda val: eigen_ref_info(val)
 type_dict[re.compile('^Eigen::Map<.*>$')]  = lambda val: eigen_ref_info(val)
 type_dict[re.compile('^Eigen::Block<.*>$')]  = lambda val: eigen_block_info(val)
+type_dict[re.compile('^std::vector<.*>$')]  = lambda val: std_vector_info(val)
