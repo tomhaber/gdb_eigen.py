@@ -40,7 +40,7 @@ def eigen_matrix_info(val):
     # Fixed size matrices have a struct as their storage
     if data.type.code == gdb.TYPE_CODE_STRUCT:
         data = data['array']
-        data = data.cast(self.innerType.pointer())
+        data = data.cast(innerType.pointer())
 
     return rows, cols, rowMajor, innerType, data
 
